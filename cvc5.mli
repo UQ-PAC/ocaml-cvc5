@@ -49,6 +49,16 @@ module Sort : sig
       Parameters: - The bit-width of the bit-vector sort. *)
   val mk_bv_sort : TermManager.tm -> int -> sort
 
+  (** Create a function sort.
+
+      Parameters: - the sort of all the function inputs.
+      - the sort of the function's output *)
+  val mk_func_sort : TermManager.tm -> sort array -> sort -> sort
+
+  (** Create a predicate sort. `mk_pred_sort tm ls` is the same as `mk_func_sort
+      tm ls bool`. *)
+  val mk_pred_sort : TermManager.tm -> sort array -> sort
+
   (** Get the bit-width of the bit-vector sort. *)
   val bv_size : sort -> int32
 

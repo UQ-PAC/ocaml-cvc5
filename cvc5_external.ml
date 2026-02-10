@@ -200,6 +200,12 @@ external get_regexp_sort : term_manager -> sort
 external mk_bitvector_sort : term_manager -> int -> sort
   = "ocaml_cvc5_stub_mk_bitvector_sort"
 
+external mk_function_sort : term_manager -> sort array -> sort -> sort
+  = "ocaml_cvc5_stub_mk_function_sort"
+
+external mk_predicate_sort : term_manager -> sort array -> sort
+  = "ocaml_cvc5_stub_mk_predicate_sort"
+
 external get_rm_sort : term_manager -> sort = "ocaml_cvc5_stub_get_rm_sort"
 
 external mk_fp_sort :

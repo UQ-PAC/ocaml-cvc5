@@ -864,6 +864,42 @@ CAMLprim value ocaml_cvc5_stub_mk_bitvector_sort(value v, value size){
   CVC5_TRY_CATCH_END;
 }
 
+CAMLprim value ocaml_cvc5_stub_mk_function_sort(value v, value ins, value out){
+  CAMLparam3(v, ins, out);
+  CAMLlocal1(custom);
+  CVC5_TRY_CATCH_BEGIN;
+
+  std::vector<cvc5::Sort> inputs;
+  size_t arity = Wosize_val(ins);
+  inputs.reserve(arity);
+  for (size_t i = 0; i < arity; i++) {
+    inputs.emplace_back(*Sort_val(Field(ins, i)));
+  }
+
+  new(&sort_operations, &custom)
+    Sort(TermManager_val(v)->mkFunctionSort(inputs, *Sort_val(out)));
+  CAMLreturn(custom);
+  CVC5_TRY_CATCH_END;
+}
+
+CAMLprim value ocaml_cvc5_stub_mk_predicate_sort(value v, value ins){
+  CAMLparam2(v, ins);
+  CAMLlocal1(custom);
+  CVC5_TRY_CATCH_BEGIN;
+
+  std::vector<cvc5::Sort> inputs;
+  size_t arity = Wosize_val(ins);
+  inputs.reserve(arity);
+  for (size_t i = 0; i < arity; i++) {
+    inputs.emplace_back(*Sort_val(Field(ins, i)));
+  }
+
+  new(&sort_operations, &custom)
+    Sort(TermManager_val(v)->mkPredicateSort(inputs));
+  CAMLreturn(custom);
+  CVC5_TRY_CATCH_END;
+}
+
 CAMLprim value ocaml_cvc5_stub_get_real_sort(value v){
   CAMLparam1(v);
   CAMLlocal1(custom);
